@@ -1,8 +1,5 @@
 use crate::genie::GenieError;
 use rust_bert::pipelines::summarization::SummarizationModel;
-use rust_bert::bart::BartModel;
-use rust_bert::roberta::RobertaForQuestionAnswering;
-use rust_bert::bert::BertConfig;
 use rust_bert::pipelines::question_answering::{QuestionAnsweringModel, QaInput};
 
 const LEAST_RELEVANCE: f64 = 0.95;
@@ -12,10 +9,10 @@ pub struct NLPHelp {}
 impl NLPHelp {
     pub fn simplify(statements: &str) -> Result<Vec<String>, GenieError> {
         let model = SummarizationModel::new(Default::default())?;
-        Ok(model.summarize(statements)?)
+        Ok(model.summarize([statements]))
     }
 
-    pub fn is_relevant(question: &str, answers: Vec<String>) -> Result<Option<String>, GenieError> {
+    pub fn is_relevant(question: &str, answers: Vec<String>) -> Result<Option<Vec<String>>, GenieError> {
         let model = QuestionAnsweringModel::new(Default::default())?;
         let qa_inputs: Vec<QaInput> = answers.iter().map(|answer| {
             QaInput {
@@ -31,6 +28,6 @@ impl NLPHelp {
             }
         }));
 
-        Ok(best_answers)
+        Ok(Some(best_answers))
     }
 }

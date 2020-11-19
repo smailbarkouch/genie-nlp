@@ -1,10 +1,11 @@
+use crate::genie::Genie;
 
 mod search;
 mod genie;
 mod choice;
 
 fn main() {
-    let phrase = "What is the meaning of life?";
+    Genie::perform_search_query("What is the meaning of life?");
 }
 
 
