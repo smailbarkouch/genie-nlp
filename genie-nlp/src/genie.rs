@@ -1,12 +1,11 @@
 use rust_bert::RustBertError;
 use crate::search::SearchForContent;
-use crate::choice::NLPHelp;
+use crate::choice::{NLPHelp, RelevantAnswer};
 
 #[derive(Debug)]
 pub enum GenieError {
     WikiError(wikipedia::Error),
     NLPError(RustBertError),
-    RequestError(reqwest::Error),
     HtmlParseError(std::io::Error),
     HtmlSearchError(std::fmt::Error),
 }
@@ -20,12 +19,6 @@ impl From<wikipedia::Error> for GenieError {
 impl From<RustBertError> for GenieError {
     fn from(error: RustBertError) -> Self {
         GenieError::NLPError(error)
-    }
-}
-
-impl From<reqwest::Error> for GenieError {
-    fn from(error: reqwest::Error) -> Self {
-        GenieError::RequestError(error)
     }
 }
 
@@ -47,14 +40,25 @@ impl Genie {
     pub fn perform_search_query(question: &str) {
         let searcher = SearchForContent::new();
         let search_results = searcher.wiki_search(question).unwrap();
+        let mut answer_results = Vec::<RelevantAnswer>::new();
 
+        println!("Found wiki pages.");
         search_results.iter().for_each(|result| {
             let article = searcher.get_wiki_article(result.clone()).unwrap();
-            let summaries = NLPHelp::simplify(&article.summary).unwrap();
-            println!("{:?}", NLPHelp::is_relevant(question, summaries).unwrap());
+            answer_results.append(NLPHelp::is_relevant(question, article.summary).unwrap().as_mut());
+        });
+        println!("Found the most relevant pages.");
+
+        let mut best_answer = String::from("Genie couldn't figure out the answer.");
+        let mut best_score = 0f64;
+        answer_results.iter().for_each(|result| {
+            if result.score > best_score {
+                best_answer = format!("The answer should be: {}", result.answer.clone());
+                best_score = result.score;
+            }
         });
 
-
+        println!("{}", best_answer);
     }
 
 }
