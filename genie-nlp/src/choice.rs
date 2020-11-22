@@ -2,7 +2,7 @@ use crate::genie::GenieError;
 use rust_bert::pipelines::summarization::SummarizationModel;
 use rust_bert::pipelines::question_answering::{QuestionAnsweringModel, QaInput};
 
-const LEAST_RELEVANCE: f64 = 0.9;
+const LEAST_RELEVANCE: f64 = 0.5;
 
 pub struct RelevantAnswer {
     pub answer: String,

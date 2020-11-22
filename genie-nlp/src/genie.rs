@@ -38,11 +38,12 @@ pub struct Genie {}
 
 impl Genie {
     pub fn perform_search_query(question: &str) {
+        println!("Looking for relevant wiki pages.");
         let searcher = SearchForContent::new();
         let search_results = searcher.wiki_search(question).unwrap();
         let mut answer_results = Vec::<RelevantAnswer>::new();
 
-        println!("Found wiki pages.");
+        println!("Looking through each summary for the best answer.");
         search_results.iter().for_each(|result| {
             let article = searcher.get_wiki_article(result.clone()).unwrap();
             let answer_relevance = NLPHelp::is_relevant(question, article.summary).unwrap();
@@ -50,8 +51,8 @@ impl Genie {
                 answer_results.push(answer_relevance.unwrap());
             }
         });
-        println!("Found the most relevant answers.");
 
+        println!("Taking the best answers and finding the highest scoring one.");
         let mut best_answer = String::from("Genie couldn't find an accurate enough answer.");
         let mut best_score = 0f64;
         answer_results.iter().for_each(|result| {
