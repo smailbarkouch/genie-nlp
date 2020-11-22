@@ -1,6 +1,6 @@
 # genie-nlp
 
-A question answering program that uses wikipedia and natural language processing. Genie works best with research type question (ie stuff you would look for on wikipedia).
+A question answering program that uses wikipedia and natural language processing. Genie works best with research type questions (ie stuff you would look for on wikipedia).
 
 ### Accuracy
 
