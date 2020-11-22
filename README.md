@@ -1,6 +1,22 @@
 # genie-nlp
 
-An instant answers engine fueled by wikipedia and nlp.
+A question answering program that uses wikipedia and natural language processing. Genie works best with research type question (ie stuff you would look for on wikipedia).
+
+### Accuracy
+
+Genie isn't accurate right now. Some examples include:
+
+```
+Question: Are oranges or apple better?
+Answer: Oranges & Lemons is the eleventh studio album and the second double album by the English band XTC, released 27 February 1989 on Virgin Records...
+```
+
+```
+Question: What is the meaning of life?
+Answer: The Meaning of Life is an Irish television programme, broadcast on RTÉ One. Presented by Gay Byrne, each edition involves the veteran broadcaster interviewing a prominent public figure...
+```
+
+There is a limit on how inaccurate answers can be. Right now it is `0.9`, and this means that the score that the question answering model gives (which is out of 1.0) has to atleast be above 0.9.
 
 ### Technologies 
 
@@ -9,3 +25,4 @@ Libraries incoperated include
 - rust-bert: transformer-based models implemented in pure rust
 - wikipedia: a way to crawl and scrape wikipedia articles
 
+The only transformer based model being used (for now) is `RoBERTa`, and it is used to determine if a given answer makes sense relative to the question (on a shallow level).
