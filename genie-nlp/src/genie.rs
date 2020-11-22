@@ -45,15 +45,18 @@ impl Genie {
         println!("Found wiki pages.");
         search_results.iter().for_each(|result| {
             let article = searcher.get_wiki_article(result.clone()).unwrap();
-            answer_results.append(NLPHelp::is_relevant(question, article.summary).unwrap().as_mut());
+            let answer_relevance = NLPHelp::is_relevant(question, article.summary).unwrap();
+            if answer_relevance.is_some() {
+                answer_results.push(answer_relevance.unwrap());
+            }
         });
-        println!("Found the most relevant pages.");
+        println!("Found the most relevant answers.");
 
-        let mut best_answer = String::from("Genie couldn't figure out the answer.");
+        let mut best_answer = String::from("Genie couldn't find an accurate enough answer.");
         let mut best_score = 0f64;
         answer_results.iter().for_each(|result| {
             if result.score > best_score {
-                best_answer = format!("The answer should be: {}", result.answer.clone());
+                best_answer = format!("The answer, with a score of {}, should be: {}", result.score, result.answer.clone());
                 best_score = result.score;
             }
         });
