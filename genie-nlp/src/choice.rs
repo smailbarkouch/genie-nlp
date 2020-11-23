@@ -2,7 +2,7 @@ use crate::genie::GenieError;
 use rust_bert::pipelines::summarization::SummarizationModel;
 use rust_bert::pipelines::question_answering::{QuestionAnsweringModel, QaInput};
 
-const LEAST_RELEVANCE: f64 = 0.5;
+const LEAST_RELEVANCE: f64 = 0.1;
 
 pub struct RelevantAnswer {
     pub answer: String,
@@ -19,8 +19,20 @@ impl NLPHelp {
         Ok(summary.map(|summary_ref| summary_ref.clone()))
     }
 
-    pub fn is_relevant(question: &str, answer: String) -> Result<Option<RelevantAnswer>, GenieError> {
+    pub fn is_relevant(question: &str, answer: String, weight: f64) -> Result<Option<RelevantAnswer>, GenieError> {
         let model = QuestionAnsweringModel::new(Default::default())?;
+        let sentences: Vec<&str> = answer.split(".").collect();
+        // let mut true_answer = String::new();
+
+        // for index in 0..10 {
+        //     let sentence = sentences.get(index);
+        //     if sentence.is_some() {
+        //         true_answer.push_str(format!("{}. ", sentence.unwrap()).as_str());
+        //     } else {
+        //         break
+        //     }
+        // }
+
         let predictions = model.predict(&[QaInput {
             question: String::from(question),
             context: answer.clone(),
@@ -33,12 +45,12 @@ impl NLPHelp {
             score += model_answer.score;
         }));
 
-        let avg_score = score / word_count;
+        let avg_score = score * weight / word_count ;
+        println!("\n\nScore: {}, Answer: {}", avg_score, answer);
         if avg_score > LEAST_RELEVANCE {
             Ok(Some(RelevantAnswer { answer: answer.clone(), score: avg_score }))
         } else {
             Ok(None)
         }
-
     }
 }
