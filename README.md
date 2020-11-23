@@ -1,6 +1,6 @@
 # genie-nlp
 
-A question answering program that uses wikipedia and natural language processing. Genie works best with research type question (ie stuff you would look for on wikipedia).
+Get instant answers using wikipedia and transformer models. Genie works best with research type questions (ie stuff you would look for on wikipedia).
 
 ### Accuracy
 
@@ -16,7 +16,16 @@ Question: What is the meaning of life?
 Answer: The Meaning of Life is an Irish television programme, broadcast on RTÉ One. Presented by Gay Byrne, each edition involves the veteran broadcaster interviewing a prominent public figure...
 ```
 
-There is a limit on how inaccurate answers can be. Right now it is `0.9`, and this means that the score that the question answering model gives (which is out of 1.0) has to atleast be above 0.9.
+There is a limit on how inaccurate answers can be. This limit is applied towards the question answering model's score, which is out of `1.0`. An answer has to have a score `> 0.5` to still be usuable.
+
+### TODO
+- [x] Use `rust bert` and `wikipedia` to compile answers
+- [x] Make Genie give somewhat relevant answers
+- [x] Make Genie a command
+- [ ] Answers can be portions of a summary
+- [ ] Use other methods to verify an answer's validity
+- [ ] Make it robust and friendly
+- [ ] Deploy it to a package manager (like Brew)
 
 ### Technologies 
 
