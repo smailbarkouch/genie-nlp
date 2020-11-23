@@ -4,25 +4,22 @@ Get instant answers using wikipedia and transformer models. Genie works best wit
 
 ### Accuracy
 
-Genie isn't accurate right now. Some examples include:
+Genie is somewhat accurate. Some examples include:
 
 ```
-Question: Are oranges or apple better?
-Answer: Oranges & Lemons is the eleventh studio album and the second double album by the English band XTC, released 27 February 1989 on Virgin Records...
+Question: What is Agar.io?
+Answer: Agar.io is a massively multiplayer online action game created by Brazilian developer Matheus Valadares...
 ```
 
 ```
 Question: What is the meaning of life?
-Answer: The Meaning of Life is an Irish television programme, broadcast on RTÉ One. Presented by Gay Byrne, each edition involves the veteran broadcaster interviewing a prominent public figure...
+Answer: The meaning of life, or the answer to the question: "What is the meaning of life?", pertains to the significance of living or existence in general... 
 ```
-
-There is a limit on how inaccurate answers can be. This limit is applied towards the question answering model's score, which is out of `1.0`. An answer has to have a score `> 0.5` to still be usuable.
 
 ### TODO
 - [x] Use `rust bert` and `wikipedia` to compile answers
 - [x] Make Genie give somewhat relevant answers
 - [x] Make Genie a command
-- [ ] Answers can be portions of a summary
 - [ ] Use other methods to verify an answer's validity
 - [ ] Make it robust and friendly
 - [ ] Deploy it to a package manager (like Brew)
