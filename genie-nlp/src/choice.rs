@@ -21,17 +21,6 @@ impl NLPHelp {
 
     pub fn is_relevant(question: &str, answer: String, weight: f64) -> Result<Option<RelevantAnswer>, GenieError> {
         let model = QuestionAnsweringModel::new(Default::default())?;
-        let sentences: Vec<&str> = answer.split(".").collect();
-        // let mut true_answer = String::new();
-
-        // for index in 0..10 {
-        //     let sentence = sentences.get(index);
-        //     if sentence.is_some() {
-        //         true_answer.push_str(format!("{}. ", sentence.unwrap()).as_str());
-        //     } else {
-        //         break
-        //     }
-        // }
 
         let predictions = model.predict(&[QaInput {
             question: String::from(question),
