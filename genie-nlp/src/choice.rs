@@ -46,7 +46,6 @@ impl NLPHelp {
         }));
 
         let avg_score = score * weight / word_count ;
-        println!("\n\nScore: {}, Answer: {}", avg_score, answer);
         if avg_score > LEAST_RELEVANCE {
             Ok(Some(RelevantAnswer { answer: answer.clone(), score: avg_score }))
         } else {
