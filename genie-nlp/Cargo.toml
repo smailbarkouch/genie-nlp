@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 rust-bert = "0.11.0"
 wikipedia = "0.3.4"
+torch-sys = "0.2.1"

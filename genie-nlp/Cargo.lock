@@ -726,6 +726,7 @@ name = "genie-nlp"
 version = "0.1.0"
 dependencies = [
  "rust-bert",
+ "torch-sys",
  "wikipedia",
 ]
 
