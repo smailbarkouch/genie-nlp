@@ -7,12 +7,12 @@ Get instant answers using wikipedia and transformer models. Genie works best wit
 Genie is somewhat accurate. Some examples include:
 
 ```
-Question: What is Agar.io?
+> genie-nlp "What is Agar.io?"
 Answer: Agar.io is a massively multiplayer online action game created by Brazilian developer Matheus Valadares...
 ```
 
 ```
-Question: What is the meaning of life?
+> genie-nlp What is the meaning of life?
 Answer: The meaning of life, or the answer to the question: "What is the meaning of life?", pertains to the significance of living or existence in general... 
 ```
 
