@@ -1,6 +1,6 @@
 # genie-nlp
 
-Get instant answers using wikipedia and transformer models. Genie works best with research type questions (ie stuff you would look for on wikipedia).
+Get instant answers using wikipedia and transformer models. Genie currently works best with research type questions (ie stuff you would look for on wikipedia).
 
 ### Accuracy
 
