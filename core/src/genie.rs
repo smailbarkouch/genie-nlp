@@ -46,7 +46,7 @@ impl Genie {
         println!("Looking through each summary for the best answer.");
         for (index, result) in search_results.iter().enumerate() {
             let article = searcher.get_wiki_article(result.clone()).unwrap();
-            let answer_relevance = NLPHelp::is_relevant(question, article.summary, Self::normalize_weight((index + 1) as f64) as f64).unwrap();
+            let answer_relevance = NLPHelp::is_relevant(question, article.summary, index + 1).unwrap();
             if answer_relevance.is_some() {
                 answer_results.push(answer_relevance.unwrap());
             }
@@ -63,10 +63,6 @@ impl Genie {
         });
 
         println!("{}", best_answer);
-    }
-
-    fn normalize_weight(weight: f64) -> f64 {
-        1f64 / weight
     }
 
 }

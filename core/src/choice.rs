@@ -12,6 +12,10 @@ pub struct RelevantAnswer {
 pub struct NLPHelp {}
 
 impl NLPHelp {
+    fn normalize_weight(weight: usize) -> f64 {
+        1.0 / weight as f64
+    }
+
     pub fn simplify(statements: &str) -> Result<Option<String>, GenieError> {
         let model = SummarizationModel::new(Default::default())?;
         let summaries = model.summarize([statements]);
@@ -19,7 +23,8 @@ impl NLPHelp {
         Ok(summary.map(|summary_ref| summary_ref.clone()))
     }
 
-    pub fn is_relevant(question: &str, answer: String, weight: f64) -> Result<Option<RelevantAnswer>, GenieError> {
+    pub fn is_relevant(question: &str, answer: String, weight: usize) -> Result<Option<RelevantAnswer>, GenieError> {
+        let normalized_weight = Self::normalize_weight(weight);
         let model = QuestionAnsweringModel::new(Default::default())?;
 
         let predictions = model.predict(&[QaInput {
@@ -34,7 +39,7 @@ impl NLPHelp {
             score += model_answer.score;
         }));
 
-        let avg_score = score * weight / word_count ;
+        let avg_score = score * normalized_weight / word_count ;
         if avg_score > LEAST_RELEVANCE {
             Ok(Some(RelevantAnswer { answer: answer.clone(), score: avg_score }))
         } else {

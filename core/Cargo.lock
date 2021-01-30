@@ -37,6 +37,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.38"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "afddf7f520a80dbf76e6f50a35bca42a2331ef227a28b3b6dc5c2e2338d114b1"
+
+[[package]]
 name = "arrayref"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -722,11 +728,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "genie-nlp"
+name = "genie-nlp-core"
 version = "0.1.0"
 dependencies = [
  "rust-bert",
- "torch-sys",
  "wikipedia",
 ]
 
@@ -1797,9 +1802,9 @@ dependencies = [
 
 [[package]]
 name = "rust-bert"
-version = "0.11.0"
+version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22a2dba8349b35dc5fd7f50f46255033eee36ba563b73f1b22a1c75e6a63fa33"
+checksum = "3b1bb442a9f8507be282cc67e11a7b72c0c707ed04a59e2f67c9603509960347"
 dependencies = [
  "cached-path",
  "dirs",
@@ -1816,9 +1821,9 @@ dependencies = [
 
 [[package]]
 name = "rust_tokenizers"
-version = "6.0.0"
+version = "6.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6dd7f71fa3a4fa64d2fc5b1ff31b75844b5639e86e7fff9c792039631fce3275"
+checksum = "da2d4b6b8e2f39bb34d7df8a8378f124fe4f07c448cbffb5d84fa5cbac7297ec"
 dependencies = [
  "csv",
  "hashbrown",
@@ -2056,9 +2061,9 @@ dependencies = [
 
 [[package]]
 name = "tch"
-version = "0.2.1"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57756d8b38ed254fbb9ed7cf47fdd0eb93ffe4d1aa927fd5ffa6b019d0fa4efd"
+checksum = "8fec1d5951adaf4e2de38a094aedf98d44ae0a2e50e6bd7c924f798e0ca944f3"
 dependencies = [
  "half",
  "lazy_static",
@@ -2326,14 +2331,14 @@ dependencies = [
 
 [[package]]
 name = "torch-sys"
-version = "0.2.1"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "69bad0036396fded468d8f6ea3105b99282dbb65d5da498f65c65e0816738417"
+checksum = "8354bdb8a9f50da96c0eda743c7bccc747a319294d3ed3ffbce6f9ea2cea68da"
 dependencies = [
+ "anyhow",
  "cc",
  "cmake",
  "curl",
- "failure",
  "libc",
  "zip",
 ]
